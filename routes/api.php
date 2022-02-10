@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ModuleController;
@@ -12,6 +13,8 @@ Route::get('/', function () {
         'success' => true,
     ]);
 });
+
+Route::post('/auth', [AuthController::class, 'auth']);
 
 Route::get('/courses', [CourseController::class, 'index']);
 Route::get('/course/{id}', [CourseController::class, 'find']);
