@@ -16,17 +16,22 @@ Route::get('/', function () {
 
 Route::post('/auth', [AuthController::class, 'auth']);
 
-Route::get('/courses', [CourseController::class, 'index']);
-Route::get('/course/{id}', [CourseController::class, 'find']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::get('/course/{id}', [CourseController::class, 'find']);
 
-Route::get('/course/{id}/modules', [ModuleController::class, 'index']);
+    Route::get('/course/{id}/modules', [ModuleController::class, 'index']);
 
-Route::get('/module/{id}/lessons', [LessonController::class, 'index']);
-Route::get('/lesson/{id}', [LessonController::class, 'show']);
+    Route::get('/module/{id}/lessons', [LessonController::class, 'index']);
+    Route::get('/lesson/{id}', [LessonController::class, 'show']);
 
-Route::get('/my-supports', [SupportController::class, 'getUserSupports']);
-Route::get('/supports', [SupportController::class, 'index']);
+    Route::get('/my-supports', [SupportController::class, 'getUserSupports']);
+    Route::get('/supports', [SupportController::class, 'index']);
 
-Route::post('/supports', [SupportController::class, 'store']);
+    Route::post('/supports', [SupportController::class, 'store']);
 
-Route::post('/replies', [ReplySupportController::class, 'store']);
+    Route::post('/replies', [ReplySupportController::class, 'store']);
+});
+
