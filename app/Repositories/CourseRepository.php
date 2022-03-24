@@ -15,11 +15,15 @@ class CourseRepository
 
     public function getAllCourses()
     {
-        return Course::get();
+        return $this->model
+            ->with('modules.lessons.views')
+            ->get();
     }
 
     public function getCourse(string $id)
     {
-        return Course::findOrFail($id);
+        return $this->model
+            ->with('modules.lessons')
+            ->findOrFail($id);
     }
 }

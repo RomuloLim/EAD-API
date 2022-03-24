@@ -15,6 +15,9 @@ class ModuleRepository
 
     public function getModuleByCourseId(string $courseId)
     {
-        return Module::where('course_id', $courseId)->get();
+        return $this->model
+            ->with('lessons.views')
+            ->where('course_id', $courseId)
+            ->get();
     }
 }

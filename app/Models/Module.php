@@ -18,8 +18,13 @@ class Module extends Model
     protected $table = 'modules';
     protected $fillable = ['name'];
 
-    public function course():BelongsTo
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class);
     }
 }
